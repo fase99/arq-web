@@ -1,19 +1,23 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import InnerHero from '@components/sections/InnerHero.astro';
-import TeamGrid from '@components/sections/TeamGrid.astro';
+import AboutSection from '@components/sections/AboutSection.astro';
 
-const seoTitle = "Our Team";
-const seoDescription = "Our team is made up of a diverse group of people who are passionate about building amazing websites with ease.";
+const seoTitle = "Sobre Nosotros";
+const seoDescription = "Conoce más sobre nuestra empresa de arquitectura.";
 
 const heroContent = {
-    title: "Our Team",
-    description: "Meet the people behind the magic",
+    title: "Sobre Nosotros",
+    description: "Nuestra historia y misión.",
 }
 
+const aboutContent = {
+    title: "Nuestra Empresa",
+    description: "Somos un estudio de arquitectura dedicado a crear espacios innovadores y funcionales. Nuestra pasión es el diseño y la construcción de proyectos que no solo cumplen con las necesidades de nuestros clientes, sino que también inspiran y mejoran el entorno."
+}
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
     <InnerHero content={heroContent}  />
-    <TeamGrid padding="base" />
+    <AboutSection title={aboutContent.title} description={aboutContent.description} padding="base" />
 </Layout>

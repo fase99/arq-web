@@ -1,0 +1,24 @@
+---
+import { getPaddingClass } from '@utils/styleUtils';
+import type { PaddingSize } from '@utils/styleUtils';
+
+interface Props {
+    title: string;
+    description: string;
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+}
+
+const { title, description, padding, paddingTop, paddingBottom } = Astro.props;
+const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
+---
+
+<section class:list={['relative', paddingClass]}>
+    <div class="site-container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-h2 font-bold mb-4">{title}</h1>
+            <p class="text-lg text-body-base">{description}</p>
+        </div>
+    </div>
+</section>
