@@ -7,19 +7,19 @@ import Checkbox from "@components/ui/form/Checkbox.astro";
 import Select from "@components/ui/form/Select.astro";
 
 const hearAboutOptions = [
-    { label: "Search Engine", value: "search" },
-    { label: "Social Media", value: "social" },
-    { label: "Friend/Colleague", value: "referral" },
-    { label: "Other", value: "other" }
+    { label: "Buscador", value: "search" },
+    { label: "Redes Sociales", value: "social" },
+    { label: "Amigo/Colaborador", value: "referral" },
+    { label: "Otro", value: "other" }
 ];
 
-const interestOptions = [
-    { label: "Web Development", value: "web" },
-    { label: "Mobile Development", value: "mobile" },
-    { label: "Design Services", value: "design" },
-    { label: "Consulting", value: "consulting" }
-];
-
+// const interestOptions = [
+//     { label: "Web Development", value: "web" },
+//     { label: "Mobile Development", value: "mobile" },
+//     { label: "Design Services", value: "design" },
+//     { label: "Consulting", value: "consulting" }
+// ];
+// Servicios a cambiar
 const serviceOptions = [
     { label: "Website Development", value: "website" },
     { label: "Mobile App Development", value: "mobile" },
@@ -28,26 +28,26 @@ const serviceOptions = [
     { label: "Consulting", value: "consulting" }
 ];
 
-const budgetOptions = [
-    { label: "$5,000 - $10,000", value: "5-10k" },
-    { label: "$10,000 - $25,000", value: "10-25k" },
-    { label: "$25,000 - $50,000", value: "25-50k" },
-    { label: "$50,000+", value: "50k+" }
-];
+// const budgetOptions = [
+//     { label: "$5,000 - $10,000", value: "5-10k" },
+//     { label: "$10,000 - $25,000", value: "10-25k" },
+//     { label: "$25,000 - $50,000", value: "25-50k" },
+//     { label: "$50,000+", value: "50k+" }
+// ];
 
 const formBackground = 'light';
 ---
 <form class="space-y-6 bg-white p-6 rounded-lg">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
-        label="Name"
+        label="Nombre Completo"
         id="name"
         name="name"
         required
         background={formBackground}
         />
         <Input
-        label="Email"
+        label="Email Corporativo"
         type="email"
         id="email"
         name="email"
@@ -57,14 +57,14 @@ const formBackground = 'light';
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <Input
-        label="Phone"
+        label="Número de Teléfono"
         type="tel"
         id="phone"
         name="phone"
         background={formBackground}
     />
     <Input
-        label="Company"
+        label="Nombre de la Empresa"
         id="company"
         name="company"
         background={formBackground}
@@ -73,24 +73,24 @@ const formBackground = 'light';
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Radio
-            label="How did you hear about us?"
+            label="¿Cómo nos conociste?"
             id="hear-about"
             name="hear-about"
             options={hearAboutOptions}
             required
             background={formBackground}
         />
-    <Checkbox
-        label="Areas of Interest"
+    <!-- <Checkbox
+        label="Areas de Interés"
         id="interests"
         name="interests"
         options={interestOptions}
         background={formBackground}
-    />
+    /> -->
     </div>
     
     <Textarea
-        label="Message"
+        label="Mensaje"
         id="message"
         name="message"
         required
@@ -98,7 +98,7 @@ const formBackground = 'light';
     />
     
     <Checkbox
-        label="I agree to the terms and conditions"
+        label="Acepto los términos y condiciones"
         id="terms"
         name="terms"
         required
@@ -107,15 +107,15 @@ const formBackground = 'light';
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Select
-            label="What service are you interested in?"
+            label="¿Qué servicio te interesa?"
             id="service"
             name="service"
             options={serviceOptions}
             required
-            placeholder="Choose a service"
+            placeholder="Elige un servicio"
             background={formBackground}
         />
-        <Select
+        <!-- <Select
             label="Budget Range"
             id="budget"
             name="budget"
@@ -123,7 +123,7 @@ const formBackground = 'light';
             required
             placeholder="Select your budget"
             background={formBackground}
-        />
+        /> -->
     </div>
 
 

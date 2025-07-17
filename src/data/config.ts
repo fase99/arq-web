@@ -6,16 +6,16 @@ export const siteConfig = {
       Github: 'https://github.com/withastro',
       Instagram: 'https://www.instagram.com/astrodotbuild',
       LinkedIn: 'https://www.linkedin.com/company/astrodotbuild',
-      Email: 'support@titan-core.com',
-      Phone: '+123 456 7890',
-      Location: '123 Main St, Anytown, USA',
+      Email: 'info@+arq.cl',
+      Phone: '+56 9 9999 9999',
+      Location: 'Región Metropolitana, Chile',
   }
 };
 
 export const SEO = {
   Separator: '|',
-  SiteName: 'Titan Core',
-  defaultDescription: 'A modern, high-performance Astro JS theme',
+  SiteName: '+Arq',
+  defaultDescription: '+Arq es una empresa de arquitectura y diseño de interiores',
 };
   
 export const blogSetting = {
