@@ -7,7 +7,7 @@ export const siteConfig = {
       Instagram: 'https://www.instagram.com/astrodotbuild',
       LinkedIn: 'https://www.linkedin.com/company/astrodotbuild',
       Email: 'info@+arq.cl',
-      Phone: '+56 9 9999 9999',
+      Phone: '+56 9 7988 5559',
       Location: 'Región Metropolitana, Chile',
   }
 };
