@@ -22,12 +22,12 @@ const getLogoClass = () => {
 };
 ---
 
-<a href="/" class:list={['logo uppercase font-logo transition-colors duration-200 font-light', getLogoClass()]}>
+<a href="/" class:list={['logo uppercase font-extrabold transition-colors duration-200 ', getLogoClass()]}>
     {
         // If image is the only element in this link, its alt attribute should be a textual representation.
         // Please, use something like your company name or “Home”, not “logo.”
         // If there is link text, leave alt empty.
     }
     <Image src={logo} alt="" class="hidden" />
-    <span class="font-bold">+</span> Arq Consultores
+    <span class="font-bold">+</span> Arq 
 </a>
