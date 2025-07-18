@@ -2,22 +2,30 @@
 import Layout from '@layouts/Layout.astro';
 import InnerHero from '@components/sections/InnerHero.astro';
 import AboutSection from '@components/sections/AboutSection.astro';
+import arquitecturaImage from '@assets/images/edificio.jpg';
 
 const seoTitle = "Sobre Nosotros";
 const seoDescription = "Conoce más sobre nuestra empresa de arquitectura.";
 
 const heroContent = {
     title: "Sobre Nosotros",
-    description: "Nuestra historia y misión.",
+    description: "Conoce más sobre nuestra empresa de arquitectura.",
 }
 
 const aboutContent = {
-    title: "Nuestra Empresa",
-    description: "Somos un estudio de arquitectura dedicado a crear espacios innovadores y funcionales. Nuestra pasión es el diseño y la construcción de proyectos que no solo cumplen con las necesidades de nuestros clientes, sino que también inspiran y mejoran el entorno."
+    title: "Somos especialistas",
+    description: "En +Arq ofrecemos soluciones arquitectónicas integrales para personas, empresas y comunidades. Profesionales comprometidos con cada etapa de tu proyecto.",
+    mision: "Buscamos transformar la forma en que las personas interactúan con los espacios a través de un diseño consciente y sostenible.",
+    vision: "Nuestra visión es ser líderes en el sector de la arquitectura"
 }
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
     <InnerHero content={heroContent}  />
-    <AboutSection title={aboutContent.title} description={aboutContent.description} padding="base" />
+    <AboutSection title={aboutContent.title} 
+    description={aboutContent.description} 
+    mision={aboutContent.mision} 
+    vision={aboutContent.vision} 
+    image={arquitecturaImage}
+    padding="base" />
 </Layout>
