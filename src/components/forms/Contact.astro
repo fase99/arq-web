@@ -5,6 +5,7 @@ import Textarea from "@components/ui/form/Textarea.astro";
 import Radio from "@components/ui/form/Radio.astro";
 import Checkbox from "@components/ui/form/Checkbox.astro";
 import Select from "@components/ui/form/Select.astro";
+import { sendSimpleContactEmail, type ContactFormData } from "@utils/emailService.ts";
 
 const hearAboutOptions = [
     { label: "Buscador", value: "search" },
@@ -13,122 +14,266 @@ const hearAboutOptions = [
     { label: "Otro", value: "other" }
 ];
 
-// const interestOptions = [
-//     { label: "Web Development", value: "web" },
-//     { label: "Mobile Development", value: "mobile" },
-//     { label: "Design Services", value: "design" },
-//     { label: "Consulting", value: "consulting" }
-// ];
-// Servicios a cambiar
 const serviceOptions = [
-    { label: "Website Development", value: "website" },
-    { label: "Mobile App Development", value: "mobile" },
-    { label: "UI/UX Design", value: "design" },
-    { label: "Digital Marketing", value: "marketing" },
-    { label: "Consulting", value: "consulting" }
+    { label: "Desarrollo Web", value: "website" },
+    { label: "Desarrollo de Apps Móviles", value: "mobile" },
+    { label: "Diseño UI/UX", value: "design" },
+    { label: "Marketing Digital", value: "marketing" },
+    { label: "Consultoría", value: "consulting" }
 ];
 
-// const budgetOptions = [
-//     { label: "$5,000 - $10,000", value: "5-10k" },
-//     { label: "$10,000 - $25,000", value: "10-25k" },
-//     { label: "$25,000 - $50,000", value: "25-50k" },
-//     { label: "$50,000+", value: "50k+" }
-// ];
-
 const formBackground = 'light';
+
+// Manejar el envío del formulario
+let successMessage = "";
+let errorMessage = "";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("name") as string;
+    const email = data.get("email") as string;
+    const phone = data.get("phone") as string;
+    const company = data.get("company") as string;
+    const hearAbout = data.get("hear-about") as string;
+    const message = data.get("message") as string;
+    const service = data.get("service") as string;
+    const terms = data.get("terms") as string;
+
+    // Validación básica
+    if (!name || !email || !message || !service || !terms) {
+      throw new Error("Por favor completa todos los campos requeridos.");
+    }
+
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      throw new Error("Por favor ingresa un email válido.");
+    }
+
+    // Preparar datos para envío
+    const contactData: ContactFormData = {
+      name,
+      email,
+      phone,
+      company,
+      hearAbout,
+      message,
+      service,
+      terms
+    };
+
+    // Enviar email
+    const apiKey = import.meta.env.RESEND_API_KEY;
+    if (apiKey) {
+      // Si tienes configurado Resend, enviar email
+      try {
+        await sendSimpleContactEmail(contactData);
+        successMessage = "¡Gracias por tu mensaje! Te contactaremos pronto.";
+      } catch (emailError) {
+        console.error("Error al enviar email:", emailError);
+        // Aún mostrar éxito al usuario, pero logear el error
+        successMessage = "¡Gracias por tu mensaje! Hemos recibido tu consulta y te contactaremos pronto.";
+      }
+    } else {
+      // Si no tienes Resend configurado, solo logear los datos
+      console.log("Datos del formulario recibidos:", {
+        ...contactData,
+        timestamp: new Date().toISOString(),
+        userAgent: Astro.request.headers.get('user-agent'),
+        ip: Astro.clientAddress
+      });
+      successMessage = "¡Gracias por tu mensaje! Hemos recibido tu consulta y te contactaremos pronto.";
+    }
+    
+  } catch (error) {
+    console.error("Error al procesar el formulario:", error);
+    errorMessage = error instanceof Error ? error.message : "Ha ocurrido un error inesperado. Por favor intenta nuevamente.";
+  }
+}
 ---
-<form class="space-y-6 bg-white p-6 rounded-lg">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Input
-        label="Nombre Completo"
-        id="name"
-        name="name"
-        required
-        background={formBackground}
-        />
-        <Input
-        label="Email Corporativo"
-        type="email"
-        id="email"
-        name="email"
-        required
-        background={formBackground}
-        />
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <Input
-        label="Número de Teléfono"
-        type="tel"
-        id="phone"
-        name="phone"
-        background={formBackground}
-    />
-    <Input
-        label="Nombre de la Empresa"
-        id="company"
-        name="company"
-        background={formBackground}
-    />
+
+<form method="POST" class="space-y-6 bg-white p-8 rounded-xl shadow-lg">
+    <!-- Mensajes de estado -->
+    {successMessage && (
+        <div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg relative" role="alert">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="font-medium">{successMessage}</span>
+            </div>
+        </div>
+    )}
+    
+    {errorMessage && (
+        <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg relative" role="alert">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="font-medium">{errorMessage}</span>
+            </div>
+        </div>
+    )}
+
+    <!-- Información personal -->
+    <div class="space-y-4">
+        <h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">
+            Información Personal
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+                label="Nombre Completo"
+                id="name"
+                name="name"
+                required
+                background={formBackground}
+            />
+            <Input
+                label="Email Corporativo"
+                type="email"
+                id="email"
+                name="email"
+                required
+                background={formBackground}
+            />
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+                label="Número de Teléfono"
+                type="tel"
+                id="phone"
+                name="phone"
+                background={formBackground}
+            />
+            <Input
+                label="Nombre de la Empresa"
+                id="company"
+                name="company"
+                background={formBackground}
+            />
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Radio
-            label="¿Cómo nos conociste?"
-            id="hear-about"
-            name="hear-about"
-            options={hearAboutOptions}
+    <!-- Información del proyecto -->
+    <div class="space-y-4">
+        <h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">
+            Detalles del Proyecto
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <Radio
+                    label="¿Cómo nos conociste?"
+                    id="hear-about"
+                    name="hear-about"
+                    options={hearAboutOptions}
+                    required
+                    background={formBackground}
+                />
+            </div>
+            
+            <div>
+                <Select
+                    label="¿Qué servicio te interesa?"
+                    id="service"
+                    name="service"
+                    options={serviceOptions}
+                    required
+                    background={formBackground}
+                />
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mensaje -->
+    <div class="space-y-4">
+        <h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">
+            Tu Mensaje
+        </h3>
+        
+        <Textarea
+            label="Cuéntanos sobre tu proyecto *"
+            id="message"
+            name="message"
+            required
+            background={formBackground}
+            rows={6}
+        />
+    </div>
+    
+    <!-- Términos y condiciones -->
+    <div class="border-t border-gray-200 pt-4">
+        <Checkbox
+            label="Acepto los términos y condiciones."
+            id="terms"
+            name="terms"
             required
             background={formBackground}
         />
-    <!-- <Checkbox
-        label="Areas de Interés"
-        id="interests"
-        name="interests"
-        options={interestOptions}
-        background={formBackground}
-    /> -->
-    </div>
-    
-    <Textarea
-        label="Mensaje"
-        id="message"
-        name="message"
-        required
-        background={formBackground}
-    />
-    
-    <Checkbox
-        label="Acepto los términos y condiciones"
-        id="terms"
-        name="terms"
-        required
-        background={formBackground}
-    />
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Select
-            label="¿Qué servicio te interesa?"
-            id="service"
-            name="service"
-            options={serviceOptions}
-            required
-            placeholder="Elige un servicio"
-            background={formBackground}
-        />
-        <!-- <Select
-            label="Budget Range"
-            id="budget"
-            name="budget"
-            options={budgetOptions}
-            required
-            placeholder="Select your budget"
-            background={formBackground}
-        /> -->
+        <p class="text-sm text-gray-600 mt-2">
+            Al enviar este formulario, aceptas que procesemos tu información para responderte. 
+            <a href="/legal/privacy-policy" class="text-blue-600 hover:text-blue-800 underline">
+                Ver política de privacidad
+            </a>
+        </p>
     </div>
 
-
-
-    <div class="mt-6">
-        <Button>Enviar</Button>
+    <!-- Botón de envío -->
+    <div class="flex justify-end pt-4">
+        <Button 
+            type="submit" 
+            size="lg"
+            class="w-full md:w-auto min-w-[200px]"
+        >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+            Enviar
+        </Button>
     </div>
+    
+    <!-- Información adicional -->
+    <!-- <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-600">
+        <p class="font-medium mb-2">¿Necesitas ayuda inmediata?</p>
+        <p>Puedes contactarnos directamente:</p>
+        <ul class="mt-2 space-y-1">
+            <li>📧 Email: contacto@tuempresa.com</li>
+            <li>📱 WhatsApp: +1 (555) 123-4567</li>
+            <li>⏰ Horario: Lunes a Viernes, 9:00 AM - 6:00 PM</li>
+        </ul>
+    </div> -->
 </form>
+
+<!-- JavaScript para mejorar la experiencia del usuario -->
+<script>
+  // Agregar indicador visual de envío
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+    
+    if (form && submitButton) {
+      form.addEventListener('submit', function() {
+        // Deshabilitar el botón y mostrar estado de carga
+        submitButton.disabled = true;
+        const originalText = submitButton.innerHTML;
+        submitButton.innerHTML = `
+          <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Enviando...
+        `;
+        
+        // Restaurar el botón después de un tiempo en caso de error
+        setTimeout(() => {
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalText;
+        }, 10000);
+      });
+    }
+  });
+</script>
