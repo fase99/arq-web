@@ -11,8 +11,7 @@
         "astro": "astro"
     },
     "dependencies": {
-        "aos": "^2.3.4",
-        "resend": "^4.7.0"
+        "aos": "^2.3.4"
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.4",
