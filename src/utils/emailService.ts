@@ -1,4 +1,4 @@
-import { Resend } from 'resend';
+import emailjs from '@emailjs/browser';
 
 export interface ContactFormData {
   name: string;
@@ -11,100 +11,54 @@ export interface ContactFormData {
   terms: string;
 }
 
-// Función para obtener la instancia de Resend con validación de API key
-function getResendInstance() {
-  const apiKey = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
-  
-  if (!apiKey) {
-    throw new Error('RESEND_API_KEY no está configurado en las variables de entorno');
-  }
-  
-  return new Resend(apiKey);
-}
+// Configuración de EmailJS
+const EMAILJS_CONFIG = {
+  publicKey: import.meta.env.EMAILJS_PUBLIC_KEY || 'your_emailjs_public_key_here',
+  serviceId: import.meta.env.EMAILJS_SERVICE_ID || 'service_arq_email',
+  templateId: import.meta.env.EMAILJS_TEMPLATE_ID || 'your_template_id_here'
+};
 
-export async function sendContactEmail(data: ContactFormData) {
+export async function sendContactEmail(data: ContactFormData): Promise<{ success: boolean; message: string }> {
   try {
-    const resend = getResendInstance();
-    
-    // Email al administrador
-    const adminEmail = await resend.emails.send({
-      from: 'contacto@tudominio.com', // Cambia por tu email verificado en Resend
-      to: ['admin@tudominio.com'], // Cambia por el email donde quieres recibir los contactos
-      subject: `Nuevo contacto desde el sitio web - ${data.name}`,
-      html: `
-        <h2>Nuevo mensaje de contacto</h2>
-        <p><strong>Nombre:</strong> ${data.name}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Teléfono:</strong> ${data.phone || 'No proporcionado'}</p>
-        <p><strong>Empresa:</strong> ${data.company || 'No proporcionado'}</p>
-        <p><strong>¿Cómo nos conoció?:</strong> ${data.hearAbout || 'No especificado'}</p>
-        <p><strong>Servicio de interés:</strong> ${data.service}</p>
-        <p><strong>Mensaje:</strong></p>
-        <p>${data.message.replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p><small>Enviado desde el formulario de contacto del sitio web</small></p>
-      `
-    });
-
-    // Email de confirmación al usuario
-    const confirmationEmail = await resend.emails.send({
-      from: 'contacto@tudominio.com', // Cambia por tu email verificado en Resend
-      to: [data.email],
-      subject: '¡Gracias por contactarnos!',
-      html: `
-        <h2>¡Hola ${data.name}!</h2>
-        <p>Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos a la brevedad.</p>
-        <p><strong>Resumen de tu consulta:</strong></p>
-        <ul>
-          <li>Servicio de interés: ${data.service}</li>
-          <li>Mensaje: ${data.message}</li>
-        </ul>
-        <p>Nuestro equipo se pondrá en contacto contigo dentro de las próximas 24 horas.</p>
-        <p>¡Saludos!<br>El equipo de [Tu Empresa]</p>
-      `
-    });
-
-    return {
-      success: true,
-      adminEmailId: adminEmail.data?.id,
-      confirmationEmailId: confirmationEmail.data?.id
+    // Preparar los datos para EmailJS
+    const templateParams = {
+      from_name: data.name,
+      from_email: data.email,
+      phone: data.phone || 'No proporcionado',
+      company: data.company || 'No proporcionado',
+      hear_about: data.hearAbout || 'No especificado',
+      service: data.service,
+      message: data.message,
+      to_email: import.meta.env.CONTACT_EMAIL || 'arq.send@gmail.com',
+      reply_to: data.email,
+      terms_accepted: data.terms === 'on' ? 'Sí' : 'No'
     };
 
+    // Enviar email usando EmailJS
+    const response = await emailjs.send(
+      EMAILJS_CONFIG.serviceId,
+      EMAILJS_CONFIG.templateId,
+      templateParams,
+      EMAILJS_CONFIG.publicKey
+    );
+
+    if (response.status === 200) {
+      return {
+        success: true,
+        message: '¡Gracias por tu mensaje! Te contactaremos pronto.'
+      };
+    } else {
+      throw new Error('Error en el envío del email');
+    }
+
   } catch (error) {
-    console.error('Error al enviar email:', error);
-    throw new Error('Error al enviar el email de contacto');
+    console.error('Error al enviar email con EmailJS:', error);
+    return {
+      success: false,
+      message: 'Ha ocurrido un error al enviar tu mensaje. Por favor intenta nuevamente.'
+    };
   }
 }
 
-// Función alternativa usando plantillas HTML más simples
-export async function sendSimpleContactEmail(data: ContactFormData) {
-  try {
-    const resend = getResendInstance();
-    
-    const result = await resend.emails.send({
-      from: 'contacto@tudominio.com',
-      to: ['admin@tudominio.com'],
-      subject: `Contacto: ${data.name} - ${data.service}`,
-      text: `
-Nuevo contacto desde el sitio web:
-
-Nombre: ${data.name}
-Email: ${data.email}
-Teléfono: ${data.phone || 'No proporcionado'}
-Empresa: ${data.company || 'No proporcionado'}
-¿Cómo nos conoció?: ${data.hearAbout || 'No especificado'}
-Servicio de interés: ${data.service}
-
-Mensaje:
-${data.message}
-
-Términos aceptados: ${data.terms ? 'Sí' : 'No'}
-      `
-    });
-
-    return { success: true, emailId: result.data?.id };
-  } catch (error) {
-    console.error('Error al enviar email:', error);
-    throw new Error('Error al enviar el email de contacto');
-  }
-}
+// Función simplificada para compatibilidad
+export const sendSimpleContactEmail = sendContactEmail;
