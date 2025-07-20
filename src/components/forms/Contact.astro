@@ -7,18 +7,19 @@ import Checkbox from "@components/ui/form/Checkbox.astro";
 import Select from "@components/ui/form/Select.astro";
 
 const hearAboutOptions = [
-    { label: "Buscador", value: "search" },
-    { label: "Redes Sociales", value: "social" },
-    { label: "Amigo/Colaborador", value: "referral" },
-    { label: "Otro", value: "other" }
+{ label: "Buscador (Google, Bing, etc.)", value: "buscador" },
+{ label: "Redes Sociales (Instagram, Facebook, etc.)", value: "redes_sociales" },
+{ label: "Recomendación de amigo o colega", value: "recomendacion" },
+{ label: "Publicidad online", value: "publicidad_online" },
+{ label: "Cliente anterior o recurrente", value: "cliente_anterior" },
+{ label: "Otro", value: "otros" }
 ];
 
 const serviceOptions = [
-    { label: "Desarrollo Web", value: "website" },
-    { label: "Desarrollo de Apps Móviles", value: "mobile" },
-    { label: "Diseño UI/UX", value: "design" },
-    { label: "Marketing Digital", value: "marketing" },
-    { label: "Consultoría", value: "consulting" }
+    { label: "Servicio Básico", value: "servicio_basico" },
+    { label: "Servicio Intermedio", value: "servicio_intermedio" },
+    { label: "Servicio Avanzado", value: "servicio_avanzado" },
+    { label: "Servicio Avanzado+", value: "servicio_avanzado_plus" }
 ];
 
 const formBackground = 'light';
