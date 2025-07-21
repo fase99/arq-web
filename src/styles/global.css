@@ -90,14 +90,14 @@
     
     
     [data-theme='zeus'] {
-        --color-primary: #4a4a4a;
-        --color-primary-light: #6b6b6b;
+        --color-primary: #6a6357;
+        --color-primary-light: #999898;
         --color-primary-dark: #2d2d2d;
         --color-secondary: #8a8a8a;
         --color-secondary-light: #b5b5b5;
         --color-secondary-dark: #5a5a5a;
         --color-accent: #3d3d3d;
-        --color-background: #e7d9cb;
+        --color-background: rgb(225, 225, 224);
         --color-background-light: #efede9;
         --color-background-dark: #1a1a1a;
         --color-headline: #1a1a1a;
