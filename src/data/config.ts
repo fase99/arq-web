@@ -2,12 +2,9 @@ export const siteConfig = {
   companyName: '+ARQ',
   siteUrl: 'https://+arq.cl',
   Socials: {
-      xSocial: '',
-      Instagram: '',
-      LinkedIn: '',
       Email: 'info@+arq.cl',
       Phone: '+56 9 7988 5559',
-      Location: 'Región Metropolitana, Chile',
+      Location: 'Región Metropolitana, Chile'
   }
 };
 
