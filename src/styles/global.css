@@ -90,13 +90,13 @@
     
     
     [data-theme='zeus'] {
-        --color-primary: #a67c5a;
-        --color-primary-light: #c4956f;
-        --color-primary-dark: #8b6a4d;
-        --color-secondary: #d4b896;
-        --color-secondary-light: #e7d9cb;
-        --color-secondary-dark: #b8a082;
-        --color-accent: #9d7c63;
+        --color-primary: #6b4a32;
+        --color-primary-light: #8b6a4d;
+        --color-primary-dark: #4a2f1a;
+        --color-secondary: #a67c5a;
+        --color-secondary-light: #c4956f;
+        --color-secondary-dark: #8b6a4d;
+        --color-accent: #7a5940;
         --color-background: #faf8f5;
         --color-background-light: #f5f1ec;
         --color-background-dark: #3d3428;
@@ -106,8 +106,8 @@
         --color-body-base: #5a4a3a;
         --color-body-light: #5a4a3a;
         --color-body-dark: #e7d9cb;
-        --color-eyebrow: #8b6a4d;
-        --color-eyebrow-light: #8b6a4d;
+        --color-eyebrow: #6b4a32;
+        --color-eyebrow-light: #6b4a32;
         --color-eyebrow-dark: #d4b896;
         --color-input: var(--color-background-light);
         --color-input-light: var(--color-background-light);
@@ -124,7 +124,7 @@
         --color-nav-mobile-text-hover: #d4b896;
         --color-nav-mobile-text-active: #e7d9cb;
         --color-nav-mobile-text-current: #e7d9cb;
-        --color-header-logo: var(--color-primary);
+        --color-header-logo: #ffffff;
         --color-footer-logo: var(--color-primary);
     }
 
@@ -563,4 +563,16 @@ pre[class*="language-"] {
     padding: 0.2rem 0.5rem;
     border-radius: 2px;
     font-weight: 400;
+}
+
+/* Logo hover styles - evita que desaparezca contra el fondo */
+[data-theme='zeus'] .header-logo:hover {
+    color: #e7d9cb !important;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+[data-theme='zeus'] .header-logo {
+    color: #ffffff !important;
+    transition: all 0.3s ease;
 }

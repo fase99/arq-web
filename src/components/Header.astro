@@ -23,7 +23,7 @@ const isCurrentPage = (link: string) => {
 
 <header class="fixed top-0 z-50 w-full left-0">
     <div class="site-container mx-auto px-4 mt-4">
-        <div class="flex justify-between items-center bg-white py-4 rounded-lg px-4 border-black border">
+        <div class="flex justify-between items-center bg-primary py-4 rounded-lg px-4 border-primary-dark border shadow-lg">
             <Logo />
             <nav class="relative flex items-center gap-2 lg:gap-8" aria-label="Site Navigation">
                 {/* Desktop Menu */}
@@ -35,10 +35,10 @@ const isCurrentPage = (link: string) => {
                                     <a
                                         href={item.link}
                                         class:list={[
-                                            'text-small font-medium rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-nav-text-active',
+                                            'text-small font-medium rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-white',
                                             isCurrentPage(item.link)
-                                                ? 'text-nav-text-current font-semibold'
-                                                : 'text-nav-text hover:text-nav-text-hover',
+                                                ? 'text-white font-semibold'
+                                                : 'text-gray-200 hover:text-white',
                                         ]}
                                         aria-current={isCurrentPage(item.link) ? 'page' : undefined}
                                     >
@@ -63,7 +63,7 @@ const isCurrentPage = (link: string) => {
                                 {item.children && (
                                     <ul
                                         class:list={[
-                                            'submenu absolute mt-2 bg-nav-submenu-bg border-black border rounded-md min-w-[200px] transition-all duration-200 opacity-0 invisible overflow-hidden z-50',
+                                            'submenu absolute mt-2 bg-white border-primary border rounded-md min-w-[200px] transition-all duration-200 opacity-0 invisible overflow-hidden z-50 shadow-lg',
                                             index === headerMenu.length - 1 ? 'right-0' : 'left-0',
                                         ]}
                                     >
@@ -72,10 +72,10 @@ const isCurrentPage = (link: string) => {
                                                 <a
                                                     href={child.link}
                                                     class:list={[
-                                                        'block px-4 text-small py-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nav-text-active',
+                                                        'block px-4 text-small py-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary',
                                                         isCurrentPage(child.link)
-                                                            ? 'text-nav-text-current font-semibold'
-                                                            : 'text-nav-text hover:text-nav-text-hover',
+                                                            ? 'text-primary font-semibold'
+                                                            : 'text-gray-700 hover:text-primary hover:bg-gray-50',
                                                     ]}
                                                     aria-current={isCurrentPage(child.link) ? 'page' : undefined}
                                                 >
@@ -99,7 +99,7 @@ const isCurrentPage = (link: string) => {
                     aria-expanded="false"
                 >
                     <span class="menu-icon block">
-                        <Menu size={24} class="text-body-base" />
+                        <Menu size={24} class="text-white" />
                     </span>
                     <span class="close-icon hidden">
                         <X size={24} class="text-white" />
