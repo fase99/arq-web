@@ -14,7 +14,7 @@ export const siteConfig = {
 export const SEO = {
   Separator: '|',
   SiteName: '+Arq',
-  defaultDescription: '+Arq es una empresa de arquitectura y diseño de interiores',
+  defaultDescription: 'Soluciones Arquitectónicas Integrales',
 };
   
 export const blogSetting = {
