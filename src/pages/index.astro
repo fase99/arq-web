@@ -120,22 +120,22 @@ const faqsSection = {
     faqs: faqLists.main.faqs
 }
 
-const recentPostsSection = {
-    eyebrow: "LATEST INSIGHTS",
-    title: " Learn From Our Experience",
-    description: "Explore our latest articles on Astro JS development, theme customization tips, and web performance best practices.",
-    button: {
-            text: "View All Posts",
-            link: "/blog",
-        variant: "primary" as const
-    }
-}
+// const recentPostsSection = {
+//     eyebrow: "LATEST INSIGHTS",
+//     title: " Learn From Our Experience",
+//     description: "Explore our latest articles on Astro JS development, theme customization tips, and web performance best practices.",
+//     button: {
+//             text: "View All Posts",
+//             link: "/blog",
+//         variant: "primary" as const
+//     }
+// }
 ---
 
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="base" background="light" />
-    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Theme Usage"/>
+    <!-- <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Theme Usage"/> -->
     <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="base" />
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
     <Logos content={logosSection} background="base" padding='small'/>
