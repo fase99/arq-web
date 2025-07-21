@@ -1,7 +1,6 @@
-import { Zap, Shield, Heart, Coffee, Smile, Type, TabletSmartphone, CodeXml } from 'lucide-astro';
-
+import * as Icons from 'lucide-astro';
 // Define the LucideIcon type based on the structure of Lucide icons
-type LucideIcon = typeof Zap;
+type LucideIcon = typeof Icons.Zap;
 
 export interface Feature {
     icon: LucideIcon;
@@ -20,55 +19,45 @@ export const featureLists: Record<string, FeatureList> = {
         id: 'main',
         features: [
             {
-                icon: Zap,
-                title: 'Lightning Fast Performance',
-                description: 'Optimized for speed and performance'
+                icon: Icons.User,
+                title: 'Proyectos de Arquitectura',
+                description: 'Desarrollamos anteproyectos, permisos, especialidades, supervisión y ejecición de obras.'
             },
             {
-                icon: Shield,
-                title: 'SEO Optimized Structure',
-                description: 'Built with SEO best practices in mind'
+                icon: Icons.Shield,
+                title: 'Regularizaciones',
+                description: 'Normalizamos tu propiedad ante la DOM, el SII y las entidades correspondientes. Rápido y sin complicaciones.'
             },
             {
-                icon: TabletSmartphone,
-                title: 'Responsive by Default',
-                description: 'Mobile-friendly out of the box'
+                icon: Icons.TabletSmartphone,
+                title: 'Diseño Arquitectónico',
+                description: 'Creamos espacios funcionales, estéticos y únicos. Del diseño a la realidad, cuidando cada detalle.'
             },
             {
-                icon: Smile,
-                title: 'Easy Customization',
-                description: 'Customize the theme to your liking'
-            },
-            {
-                icon: Type,
-                title: 'TypeScript Support',
-                description: 'Built with TypeScript in mind'
-            },
-            {
-                icon: CodeXml,
-                title: 'Minimal Dependencies',
-                description: 'Keep your project lightweight'
+                icon: Icons.Smile,
+                title: 'Consultoría Especializada',
+                description: 'Equipo multidisciplinario con años de experiencia. Soluciones personalizadas para cada proyecto arquitectónico.'            
             }
         ]
     },
-    secondary: {
-        id: 'secondary',
-        features: [
-            {
-                icon: Heart,
-                title: 'Made with Love',
-                description: 'Crafted with attention to detail'
-            },
-            {
-                icon: Coffee,
-                title: 'Always Fresh',
-                description: 'Regular updates and improvements'
-            },
-            {
-                icon: Smile,
-                title: 'User Friendly',
-                description: 'Intuitive and easy to use'
-            }
-        ]
-    }
+    // secondary: {
+    //     id: 'secondary',
+    //     features: [
+    //         {
+    //             icon: Heart,
+    //             title: 'Made with Love',
+    //             description: 'Crafted with attention to detail'
+    //         },
+    //         {
+    //             icon: Coffee,
+    //             title: 'Always Fresh',
+    //             description: 'Regular updates and improvements'
+    //         },
+    //         {
+    //             icon: Smile,
+    //             title: 'User Friendly',
+    //             description: 'Intuitive and easy to use'
+    //         }
+    //     ]
+    // }
 };
