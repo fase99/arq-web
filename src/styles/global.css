@@ -90,25 +90,25 @@
     
     
     [data-theme='zeus'] {
-        --color-primary: #3557c1;
-        --color-primary-light: #4b6ed4;
-        --color-primary-dark: #1a3c8c;
-        --color-secondary: #cc9900;
-        --color-secondary-light: #e6b800;
-        --color-secondary-dark: #997300;
-        --color-accent: #1e3c8c;
-        --color-background: #f8f9ff;
-        --color-background-light: #eef1ff;
-        --color-background-dark: #1a1f3c;
-        --color-headline: #1a1f3c;
-        --color-headline-light: #1a1f3c;
-        --color-headline-dark: #ffffff;
-        --color-body-base: #1a1f3c;
-        --color-body-light: #1a1f3c;
-        --color-body-dark: #ffffff;
-        --color-eyebrow: #1e3c8c;
-        --color-eyebrow-light: #1e3c8c;
-        --color-eyebrow-dark: #e6b800;
+        --color-primary: #a67c5a;
+        --color-primary-light: #c4956f;
+        --color-primary-dark: #8b6a4d;
+        --color-secondary: #d4b896;
+        --color-secondary-light: #e7d9cb;
+        --color-secondary-dark: #b8a082;
+        --color-accent: #9d7c63;
+        --color-background: #faf8f5;
+        --color-background-light: #f5f1ec;
+        --color-background-dark: #3d3428;
+        --color-headline: #3d3428;
+        --color-headline-light: #3d3428;
+        --color-headline-dark: #e7d9cb;
+        --color-body-base: #5a4a3a;
+        --color-body-light: #5a4a3a;
+        --color-body-dark: #e7d9cb;
+        --color-eyebrow: #8b6a4d;
+        --color-eyebrow-light: #8b6a4d;
+        --color-eyebrow-dark: #d4b896;
         --color-input: var(--color-background-light);
         --color-input-light: var(--color-background-light);
         --color-input-dark: var(--color-background-dark);
@@ -120,10 +120,10 @@
         --color-nav-text-active: var(--color-primary);
         --color-nav-text-current: var(--color-primary);
         --color-nav-submenu-bg: var(--color-background-light);
-        --color-nav-mobile-text: #ffffff;
-        --color-nav-mobile-text-hover: #e6b800;
-        --color-nav-mobile-text-active: #ffffff;
-        --color-nav-mobile-text-current: #ffffff;
+        --color-nav-mobile-text: #e7d9cb;
+        --color-nav-mobile-text-hover: #d4b896;
+        --color-nav-mobile-text-active: #e7d9cb;
+        --color-nav-mobile-text-current: #e7d9cb;
         --color-header-logo: var(--color-primary);
         --color-footer-logo: var(--color-primary);
     }
