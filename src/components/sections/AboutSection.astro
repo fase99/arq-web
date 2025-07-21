@@ -20,7 +20,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 <section class:list={['relative', paddingClass]}>
     <div class="site-container mx-auto px-4">
         <!-- Diseño de dos columnas principal -->
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="grid lg:grid-cols-2 gap-12 items-center" >
             <!-- Columna izquierda: Contenido -->
             <div class="space-y-6">
                 <div class="text-left">
@@ -31,8 +31,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 {mision && (
                     <div class="relative">
                         <!-- Tarjeta principal con diseño atractivo -->
-                        <div class="relative p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 shadow-xl backdrop-blur-sm">
-
+                        <div class="relative p-8 rounded-2xl bg-white border border-gray-200 shadow-xl">
                             
                             <!-- Contenido -->
                             <div class="relative z-10">
@@ -46,7 +45,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                                             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                                         </svg>
                                     </div>
-                                    <h2 class="text-2xl font-bold text-primary">Quiénes somos</h2>
+                                    <h2 class="text-2xl font-bold text-gray-900">Quiénes somos</h2>
                                 </div>
                                 <p class="text-lg leading-relaxed text-gray-700">{mision}</p>
                             </div>

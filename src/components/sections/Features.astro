@@ -80,8 +80,8 @@ const paddingClass = getPaddingClass({
             {features.map((feature, index) => (
                 <div 
                     class:list={[
-                        "p-6 rounded-lg border border-black",
-                        background === 'dark' ? 'bg-background-base/10' : 'bg-background/90',
+                        "p-6 rounded-lg border border-gray-200 shadow-md",
+                        background === 'dark' ? 'bg-white/95' : 'bg-white',
                         "flex flex-col"
                     ]}
                     data-aos="fade-up"
@@ -96,10 +96,10 @@ const paddingClass = getPaddingClass({
                             class="text-white"
                         />
                     </div>
-                    <h3 class:list={["text-h4 mb-2", textColor]}>
+                    <h3 class:list={["text-h4 mb-2", "text-gray-900"]}>
                         {feature.title}
                     </h3>
-                    <p class:list={["text-base", textColor, "opacity-90"]}>
+                    <p class:list={["text-base", "text-gray-700"]}>
                         {feature.description}
                     </p>
                 </div>
