@@ -90,25 +90,25 @@
     
     
     [data-theme='zeus'] {
-        --color-primary: #6b4a32;
-        --color-primary-light: #8b6a4d;
-        --color-primary-dark: #4a2f1a;
-        --color-secondary: #a67c5a;
-        --color-secondary-light: #c4956f;
-        --color-secondary-dark: #8b6a4d;
-        --color-accent: #7a5940;
-        --color-background: #faf8f5;
-        --color-background-light: #f5f1ec;
-        --color-background-dark: #3d3428;
-        --color-headline: #3d3428;
-        --color-headline-light: #3d3428;
+        --color-primary: #4a4a4a;
+        --color-primary-light: #6b6b6b;
+        --color-primary-dark: #2d2d2d;
+        --color-secondary: #8a8a8a;
+        --color-secondary-light: #b5b5b5;
+        --color-secondary-dark: #5a5a5a;
+        --color-accent: #3d3d3d;
+        --color-background: #e7d9cb;
+        --color-background-light: #e7d9cb;
+        --color-background-dark: #1a1a1a;
+        --color-headline: #1a1a1a;
+        --color-headline-light: #1a1a1a;
         --color-headline-dark: #e7d9cb;
-        --color-body-base: #5a4a3a;
-        --color-body-light: #5a4a3a;
+        --color-body-base: #333333;
+        --color-body-light: #333333;
         --color-body-dark: #e7d9cb;
-        --color-eyebrow: #6b4a32;
-        --color-eyebrow-light: #6b4a32;
-        --color-eyebrow-dark: #d4b896;
+        --color-eyebrow: #4a4a4a;
+        --color-eyebrow-light: #4a4a4a;
+        --color-eyebrow-dark: #b5b5b5;
         --color-input: var(--color-background-light);
         --color-input-light: var(--color-background-light);
         --color-input-dark: var(--color-background-dark);
@@ -121,7 +121,7 @@
         --color-nav-text-current: var(--color-primary);
         --color-nav-submenu-bg: var(--color-background-light);
         --color-nav-mobile-text: #e7d9cb;
-        --color-nav-mobile-text-hover: #d4b896;
+        --color-nav-mobile-text-hover: #b5b5b5;
         --color-nav-mobile-text-active: #e7d9cb;
         --color-nav-mobile-text-current: #e7d9cb;
         --color-header-logo: #ffffff;
@@ -567,7 +567,7 @@ pre[class*="language-"] {
 
 /* Logo hover styles - evita que desaparezca contra el fondo */
 [data-theme='zeus'] .header-logo:hover {
-    color: #e7d9cb !important;
+    color: #b5b5b5 !important;
     transform: scale(1.05);
     transition: all 0.3s ease;
 }
