@@ -1,11 +1,10 @@
 export const siteConfig = {
-  companyName: 'Titan Core',
-  siteUrl: 'https://titan-core.com',
+  companyName: '+ARQ',
+  siteUrl: 'https://+arq.cl',
   Socials: {
-      xSocial: 'https://x.com/astrodotbuild',
-      Github: 'https://github.com/withastro',
-      Instagram: 'https://www.instagram.com/astrodotbuild',
-      LinkedIn: 'https://www.linkedin.com/company/astrodotbuild',
+      xSocial: '',
+      Instagram: '',
+      LinkedIn: '',
       Email: 'info@+arq.cl',
       Phone: '+56 9 7988 5559',
       Location: 'Región Metropolitana, Chile',

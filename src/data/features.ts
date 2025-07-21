@@ -19,7 +19,7 @@ export const featureLists: Record<string, FeatureList> = {
         id: 'main',
         features: [
             {
-                icon: Icons.User,
+                icon: Icons.Building2,
                 title: 'Proyectos de Arquitectura',
                 description: 'Desarrollamos anteproyectos, permisos, especialidades, supervisión y ejecición de obras.'
             },
@@ -29,12 +29,12 @@ export const featureLists: Record<string, FeatureList> = {
                 description: 'Normalizamos tu propiedad ante la DOM, el SII y las entidades correspondientes. Rápido y sin complicaciones.'
             },
             {
-                icon: Icons.TabletSmartphone,
+                icon: Icons.PencilRuler,
                 title: 'Diseño Arquitectónico',
                 description: 'Creamos espacios funcionales, estéticos y únicos. Del diseño a la realidad, cuidando cada detalle.'
             },
             {
-                icon: Icons.Smile,
+                icon: Icons.Lightbulb,
                 title: 'Consultoría Especializada',
                 description: 'Equipo multidisciplinario con años de experiencia. Soluciones personalizadas para cada proyecto arquitectónico.'            
             }
