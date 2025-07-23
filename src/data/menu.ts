@@ -9,7 +9,7 @@ export const headerMenu = [
             { name: 'Servicio Avanzado+', link: '/style-guide#buttons' }
         ]
     },
-    { name: 'Sobre +Arq', link: '/team' }
+    { name: 'Sobre +Arq', link: '/nosotros' }
 
 ];
 
