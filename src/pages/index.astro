@@ -9,8 +9,8 @@ import { statsLists } from '@data/stats';
 import Logos from '@components/sections/Logos.astro';
 import { logoLists } from '@data/logos';
 import CtaBanner from '@components/sections/CtaBanner.astro';
-import Faqs from '@components/sections/Faqs.astro';
-import { faqLists } from '@data/faqs';
+import Benefits from '@components/sections/Benefits.astro';
+import { benefitsLists } from '@data/benefits';
 import RecentPosts from '@components/sections/RecentPosts.astro';
 import heroImage from '../assets/images/home/hero-image.png';
 import styleGuideImage from '../assets/images/home/developer.jpg';
@@ -113,11 +113,9 @@ const logosSection = {
     logos: logoLists.main.logos
 }
 
-const faqsSection = {
-    eyebrow: "FAQs",
-    title: 'Frequently Asked Questions',
-    description: 'Find answers to common questions about our platform and services.',
-    faqs: faqLists.main.faqs
+const benefitsSection = {
+    ...benefitsLists.main,
+    background: 'base' as const
 }
 
 // const recentPostsSection = {
@@ -140,5 +138,5 @@ const faqsSection = {
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
     <Logos content={logosSection} background="base" padding='small'/>
     <Stats content={sideBySideStats} background='dark' padding="base"/>
-    <Faqs content={faqsSection} background="base" padding="base" />
+    <Benefits content={benefitsSection} background="base" padding="base" />
 </Layout>

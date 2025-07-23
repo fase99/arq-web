@@ -1,0 +1,92 @@
+---
+import type { Benefit } from '@data/benefits';
+import Eyebrow from '@components/ui/Eyebrow.astro';
+import { getPaddingClass, getBackgroundColor, getTextColor } from '@utils/styleUtils';
+import type { PaddingSize, ThemeColor } from '@utils/styleUtils';
+
+export interface Props {
+    content: {
+        eyebrow?: string;
+        title?: string;
+        description?: string;
+        benefits: Benefit[];
+    };
+    background?: ThemeColor;
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+}
+
+const {
+    content: {
+        eyebrow,
+        title,
+        description,
+        benefits
+    },
+    background = 'base'
+} = Astro.props;
+
+const bgColor = getBackgroundColor(background);
+const textColor = getTextColor(background);
+const paddingClass = getPaddingClass({ 
+    padding: Astro.props.padding,
+    paddingTop: Astro.props.paddingTop,
+    paddingBottom: Astro.props.paddingBottom 
+});
+---
+
+<section class:list={["relative", bgColor, paddingClass]}>
+    <div class="site-container px-4">
+        {(title || description) && (
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                {eyebrow && (
+                    <Eyebrow 
+                        text={eyebrow} 
+                        background={background} 
+                    />
+                )}
+                {title && (
+                    <h2 class:list={[textColor]} data-aos="fade-up">
+                        {title}
+                    </h2>
+                )}
+                {description && (
+                    <p class:list={["mt-4", textColor, "opacity-90"]} data-aos="fade-up" data-aos-delay="100">
+                        {description}
+                    </p>
+                )}
+            </div>
+        )}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-auto-fit-300 gap-8 auto-rows-fr">
+            {benefits.map((benefit, index) => (
+                <div 
+                    class:list={[
+                        "p-6 rounded-lg border border-gray-200 shadow-md",
+                        "bg-white",
+                        "flex flex-col"
+                    ]}
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                >
+                    <div class:list={[
+                        "w-12 h-12 flex items-center justify-center rounded-lg mb-4",
+                        "bg-primary"
+                    ]}>
+                        <benefit.icon
+                            size={24}
+                            class="text-white"
+                        />
+                    </div>
+                    <h3 class:list={["text-h4 mb-2", "text-gray-900"]}>
+                        {benefit.title}
+                    </h3>
+                    <p class:list={["text-gray-700", "opacity-90"]}>
+                        {benefit.description}
+                    </p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
