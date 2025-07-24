@@ -97,8 +97,8 @@ const paddingClass = getPaddingClass({
                                     {/* Image Section */}
                                     {feature.image && (
                                         <div class="h-48 overflow-hidden">
-                                            <Image
-                                                src={feature.image}
+                                            <img
+                                                src={typeof feature.image === 'string' ? feature.image : feature.image?.src}
                                                 alt={feature.title}
                                                 width={320}
                                                 height={192}
