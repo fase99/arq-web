@@ -1,12 +1,10 @@
 // src/data/menu.ts
-
 export const headerMenu = [
     { name: 'Nuestros Servicios', link: '/style-guide', showArrow: false,
         children: [
-            { name: 'Servicio Basico', link: '/style-guide#typography' },
-            { name: 'Servicio Intermedio', link: '/style-guide#colors' },
-            { name: 'Servicio Avanzado', link: '/style-guide#links' },
-            { name: 'Servicio Avanzado+', link: '/style-guide#buttons' }
+            { name: 'Proyectos de Arquitectura', link: '/style-guide#typography' },
+            { name: 'Regularizaciones', link: '/style-guide#colors' },
+            { name: 'Diseño Arquitectónico', link: '/style-guide#links' }
         ]
     },
     { name: 'Sobre +Arq', link: '/nosotros' }

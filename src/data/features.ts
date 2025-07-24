@@ -39,25 +39,5 @@ export const featureLists: Record<string, FeatureList> = {
                 description: 'Equipo multidisciplinario con años de experiencia. Soluciones personalizadas para cada proyecto arquitectónico.'            
             }
         ]
-    },
-    // secondary: {
-    //     id: 'secondary',
-    //     features: [
-    //         {
-    //             icon: Heart,
-    //             title: 'Made with Love',
-    //             description: 'Crafted with attention to detail'
-    //         },
-    //         {
-    //             icon: Coffee,
-    //             title: 'Always Fresh',
-    //             description: 'Regular updates and improvements'
-    //         },
-    //         {
-    //             icon: Smile,
-    //             title: 'User Friendly',
-    //             description: 'Intuitive and easy to use'
-    //         }
-    //     ]
-    // }
+    }
 };
