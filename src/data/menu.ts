@@ -2,9 +2,12 @@
 export const headerMenu = [
     { name: 'Nuestros Servicios', link: '/style-guide', showArrow: false,
         children: [
-            { name: 'Proyectos de Arquitectura', link: '/style-guide#typography' },
-            { name: 'Regularizaciones', link: '/style-guide#colors' },
-            { name: 'Diseño Arquitectónico', link: '/style-guide#links' }
+            { name: 'Proyectos de Arquitectura', link: '/servicios/proyectos-arquitectura' },
+            { name: 'Regularizaciones', link: '/servicios/regularizaciones' },
+            { name: 'Diseño Arquitectónico', link: '/servicios/diseno-arquitectonico' },
+            { name: 'Consultoría Especializada', link: '/servicios/consultoria' },
+            { name: 'Asesoría en Costos', link: '/servicios/asesoria-costos' },
+            { name: 'Gestión de Permisos', link: '/servicios/gestion-permisos' }
         ]
     },
     { name: 'Sobre +Arq', link: '/nosotros' }

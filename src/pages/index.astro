@@ -3,6 +3,7 @@ import Layout from '@layouts/Layout.astro';
 import Hero from '@components/sections/Hero.astro';
 import SplitPanel from '@components/sections/SplitPanel.astro';
 import Features from '@components/sections/Features.astro';
+import FeaturesCarousel from '@components/sections/FeaturesCarousel.astro';
 import Stats from '@components/sections/Stats.astro';
 import { featureLists } from '@data/features';
 import { statsLists } from '@data/stats';
@@ -132,7 +133,7 @@ const benefitsSection = {
 
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
     <Hero content={heroContent} />
-    <Features content={featuresSection} padding="base" background="light" />
+    <FeaturesCarousel content={featuresSection} padding="base" background="light" carouselType="swiper" />
     <!-- <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Theme Usage"/> -->
     <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="base" />
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />

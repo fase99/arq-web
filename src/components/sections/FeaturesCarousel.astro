@@ -1,0 +1,364 @@
+---
+import type { Feature } from '@data/features';
+import Button from '@components/ui/Button.astro';
+import Eyebrow from '@components/ui/Eyebrow.astro';
+import { Image } from 'astro:assets';
+import { getPaddingClass, getBackgroundColor, getTextColor } from '@utils/styleUtils';
+import type { PaddingSize, ThemeColor } from '@utils/styleUtils';
+
+export interface Props {
+    content: {
+        eyebrow?: string;
+        title?: string;
+        description?: string;
+        button?: {
+            text: string;
+            link: string;
+            variant?: 'primary' | 'secondary' | 'ghostLight' | 'ghostDark';
+        };
+        features: Feature[];
+    };
+    background?: ThemeColor;
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+    carouselType?: 'swiper' | 'grid';
+}
+
+const {
+    content: {
+        eyebrow,
+        title,
+        description,
+        button,
+        features
+    },
+    background = 'base',
+    carouselType = 'swiper'
+} = Astro.props;
+
+const bgColor = getBackgroundColor(background);
+const textColor = getTextColor(background);
+const paddingClass = getPaddingClass({ 
+    padding: Astro.props.padding,
+    paddingTop: Astro.props.paddingTop,
+    paddingBottom: Astro.props.paddingBottom 
+});
+---
+
+<section class:list={["relative", bgColor, paddingClass]}>
+    <div class="site-container px-4">
+        {(title || description) && (
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                {eyebrow && (
+                    <Eyebrow 
+                        text={eyebrow} 
+                        background={background} 
+                    />
+                )}
+                {title && (
+                    <h2 class:list={[textColor]} data-aos="fade-up">
+                        {title}
+                    </h2>
+                )}
+                {description && (
+                    <p class:list={["mt-4", textColor, "opacity-90"]} data-aos="fade-up" data-aos-delay="100">
+                        {description}
+                    </p>
+                )}
+                {button && (
+                    <div class="mt-8" data-aos="fade-up" data-aos-delay="200">
+                        <Button
+                            href={button.link}
+                            variant={button.variant || 'primary'}
+                        >
+                            {button.text}
+                        </Button>
+                    </div>
+                )}
+            </div>
+        )}
+
+        {carouselType === 'swiper' ? (
+            <!-- Carousel Layout with Swiper -->
+            <div class="features-carousel relative" data-aos="fade-up">
+                <div class="swiper features-swiper">
+                    <div class="swiper-wrapper">
+                        {features.map((feature, index) => (
+                            <div class="swiper-slide">
+                                <div 
+                                    class:list={[
+                                        "h-full rounded-xl border border-gray-200 shadow-lg overflow-hidden",
+                                        background === 'dark' ? 'bg-white/95' : 'bg-white',
+                                        "flex flex-col",
+                                        "transition-all duration-300 hover:shadow-xl hover:scale-105"
+                                    ]}
+                                >
+                                    {/* Image Section */}
+                                    {feature.image && (
+                                        <div class="h-48 overflow-hidden">
+                                            <Image
+                                                src={feature.image}
+                                                alt={feature.title}
+                                                width={320}
+                                                height={192}
+                                                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                    )}
+                                    
+                                    {/* Content Section */}
+                                    <div class="p-6 flex flex-col text-center">
+                                        <div class:list={[
+                                            "w-14 h-14 flex items-center justify-center rounded-lg mb-4 mx-auto",
+                                            "bg-primary"
+                                        ]}>
+                                            <feature.icon
+                                                size={28}
+                                                class="text-white"
+                                            />
+                                        </div>
+                                        <h3 class:list={["text-xl mb-3", "text-gray-900", "font-semibold"]}>
+                                            {feature.title}
+                                        </h3>
+                                        <p class:list={["text-base leading-relaxed", "text-gray-700"]}>
+                                            {feature.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <!-- Navigation -->
+                    <div class="swiper-button-next features-next"></div>
+                    <div class="swiper-button-prev features-prev"></div>
+                    
+                    <!-- Pagination -->
+                    <div class="swiper-pagination features-pagination"></div>
+                </div>
+            </div>
+        ) : (
+            <!-- Grid Layout (fallback) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-auto-fit gap-8 auto-rows-fr">
+                {features.map((feature, index) => (
+                    <div 
+                        class:list={[
+                            "p-6 rounded-lg border border-gray-200 shadow-md",
+                            background === 'dark' ? 'bg-white/95' : 'bg-white',
+                            "flex flex-col"
+                        ]}
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100}
+                    >
+                        <div class:list={[
+                            "w-12 h-12 flex items-center justify-center rounded-lg mb-4",
+                            "bg-primary"
+                        ]}>
+                            <feature.icon
+                                size={24}
+                                class="text-white"
+                            />
+                        </div>
+                        <h3 class:list={["text-h4 mb-2", "text-gray-900"]}>
+                            {feature.title}
+                        </h3>
+                        <p class:list={["text-base", "text-gray-700"]}>
+                            {feature.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        )}
+    </div>
+</section>
+
+<script>
+    import { Swiper } from 'swiper';
+    import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+    
+    // Initialize Swiper when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        const featuresSwiper = new Swiper('.features-swiper', {
+            modules: [Navigation, Pagination, Autoplay],
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            loop: true,
+            loopAdditionalSlides: 2,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+            pagination: {
+                el: '.features-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: '.features-next',
+                prevEl: '.features-prev',
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    centeredSlides: true,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 25,
+                    centeredSlides: false,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                    centeredSlides: false,
+                },
+                1280: {
+                    slidesPerView: 3,
+                    spaceBetween: 35,
+                    centeredSlides: false,
+                }
+            }
+        });
+        
+        // Add hover pause functionality
+        const swiperContainer = document.querySelector('.features-swiper');
+        if (swiperContainer) {
+            swiperContainer.addEventListener('mouseenter', () => {
+                featuresSwiper.autoplay.stop();
+            });
+            
+            swiperContainer.addEventListener('mouseleave', () => {
+                featuresSwiper.autoplay.start();
+            });
+        }
+    });
+</script>
+
+<style>
+    /* Import Swiper styles */
+    @import 'swiper/css';
+    @import 'swiper/css/navigation';
+    @import 'swiper/css/pagination';
+
+    .features-carousel {
+        position: relative;
+        margin: 0 auto;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .features-swiper {
+        width: 100%;
+        padding: 50px 0;
+    }
+
+    .features-swiper .swiper-slide {
+        width: 320px;
+        height: auto;
+        min-height: 380px;
+        max-height: 450px;
+    }
+
+    /* Custom navigation buttons */
+    .features-next,
+    .features-prev {
+        color: var(--color-primary) !important;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        width: 55px !important;
+        height: 55px !important;
+        margin-top: -27.5px !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .features-next:hover,
+    .features-prev:hover {
+        background: var(--color-primary);
+        color: white !important;
+        transform: scale(1.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .features-next::after,
+    .features-prev::after {
+        font-size: 20px !important;
+        font-weight: bold;
+    }
+
+    /* Custom pagination */
+    .features-pagination {
+        position: relative !important;
+        margin-top: 40px !important;
+    }
+
+    .features-pagination .swiper-pagination-bullet {
+        width: 14px;
+        height: 14px;
+        background: var(--color-primary);
+        opacity: 0.4;
+        transition: all 0.3s ease;
+        margin: 0 6px !important;
+    }
+
+    .features-pagination .swiper-pagination-bullet-active {
+        opacity: 1;
+        transform: scale(1.3);
+        background: var(--color-primary);
+    }
+
+    /* Enhanced slide styles */
+    .swiper-slide {
+        transition: all 0.3s ease;
+    }
+
+    .swiper-slide:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .features-swiper {
+            padding: 20px 0;
+        }
+        
+        .features-swiper .swiper-slide {
+            width: 300px;
+            min-height: 360px;
+            max-height: 420px;
+        }
+        
+        .features-next,
+        .features-prev {
+            width: 45px !important;
+            height: 45px !important;
+            margin-top: -22.5px !important;
+        }
+        
+        .features-next::after,
+        .features-prev::after {
+            font-size: 16px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .features-swiper .swiper-slide {
+            width: 280px;
+            min-height: 340px;
+            max-height: 400px;
+        }
+    }
+
+    /* Grid layout fallback styles */
+    .grid-cols-auto-fit {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+</style>
