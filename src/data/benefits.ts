@@ -10,7 +10,6 @@ export interface Benefit {
 export const benefitsLists = {
     main: {
         title: 'Beneficios de Elegir +Arq',
-        eyebrow: 'VENTAJAS',
         description: 'Descubre por qué somos la mejor opción para tu proyecto arquitectónico. Te ofrecemos tranquilidad, eficiencia y resultados excepcionales.',
         benefits: [
             
