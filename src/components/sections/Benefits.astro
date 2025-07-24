@@ -34,6 +34,9 @@ const paddingClass = getPaddingClass({
     paddingTop: Astro.props.paddingTop,
     paddingBottom: Astro.props.paddingBottom 
 });
+
+// We'll take the first 3 benefits for this layout
+const displayBenefits = benefits.slice(0, 3);
 ---
 
 <section class:list={["relative", bgColor, paddingClass]}>
@@ -59,23 +62,41 @@ const paddingClass = getPaddingClass({
             </div>
         )}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-auto-fit-300 gap-8 auto-rows-fr">
-            {benefits.map((benefit, index) => (
+        <div class="timeline-container relative hidden md:block">
+            <svg width="100%" height="100" class="timeline-svg absolute top-10 left-0" preserveAspectRatio="none">
+                <path d="M0,50 C250,0 250,100 500,50 C750,0 750,100 1000,50" stroke="var(--color-primary-dark)" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"></path>
+            </svg>
+            <div class="relative flex justify-between items-start">
+                {displayBenefits.map((benefit, index) => (
+                    <div class="timeline-item text-center" data-aos="fade-up" data-aos-delay={index * 150}>
+                        <div class:list={["timeline-icon", { 'scale-110 -translate-y-2': index === 1 }]}>
+                            <benefit.icon size={48} class="text-white" />
+                        </div>
+                        <h3 class="text-h4 mt-6 mb-2 text-gray-900">{benefit.title}</h3>
+                        <p class="text-gray-700 opacity-90 max-w-xs mx-auto">{benefit.description}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Mobile view: simple grid -->
+        <div class="grid grid-cols-1 md:hidden gap-8 auto-rows-fr">
+            {displayBenefits.map((benefit, index) => (
                 <div 
                     class:list={[
                         "p-6 rounded-lg border border-gray-200 shadow-md",
                         "bg-white",
-                        "flex flex-col"
+                        "flex flex-col text-center items-center"
                     ]}
                     data-aos="fade-up"
                     data-aos-delay={index * 100}
                 >
                     <div class:list={[
-                        "w-12 h-12 flex items-center justify-center rounded-lg mb-4",
+                        "w-16 h-16 flex items-center justify-center rounded-full mb-4",
                         "bg-primary"
                     ]}>
                         <benefit.icon
-                            size={24}
+                            size={32}
                             class="text-white"
                         />
                     </div>
@@ -90,3 +111,37 @@ const paddingClass = getPaddingClass({
         </div>
     </div>
 </section>
+
+<style>
+    .timeline-container {
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .timeline-svg {
+        transform: translateY(50%);
+        z-index: 0;
+        opacity: 0.3;
+    }
+    .timeline-item {
+        width: 30%;
+        position: relative;
+        z-index: 1;
+    }
+    .timeline-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        transition: transform 0.3s ease-in-out;
+    }
+    .timeline-item:hover .timeline-icon {
+        transform: scale(1.1);
+    }
+</style>
