@@ -4,10 +4,7 @@ export const headerMenu = [
         children: [
             { name: 'Proyectos de Arquitectura', link: '/servicios/proyectos-arquitectura' },
             { name: 'Regularizaciones', link: '/servicios/regularizaciones' },
-            { name: 'Diseño Arquitectónico', link: '/servicios/diseno-arquitectonico' },
-            { name: 'Consultoría Especializada', link: '/servicios/consultoria' },
-            { name: 'Asesoría en Costos', link: '/servicios/asesoria-costos' },
-            { name: 'Gestión de Permisos', link: '/servicios/gestion-permisos' }
+            { name: 'Diseño Arquitectónico', link: '/servicios/diseno-arquitectonico' }
         ]
     },
     { name: 'Sobre +Arq', link: '/nosotros' }
