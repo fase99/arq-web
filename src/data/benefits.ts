@@ -9,7 +9,8 @@ export interface Benefit {
 
 export const benefitsLists = {
     main: {
-        title: 'Beneficios de Elegir +Arq',
+        eyebrow: "¿POR QUÉ ELEGIRNOS?",
+        title: 'Beneficios de Trabajar con Nosotros',
         description: 'Descubre por qué somos la mejor opción para tu proyecto arquitectónico. Te ofrecemos tranquilidad, eficiencia y resultados excepcionales.',
         benefits: [
             
@@ -27,11 +28,6 @@ export const benefitsLists = {
                 icon: Users,
                 title: 'Cumplimiento Normativo Asegurado',
                 description: 'Navegamos la complejidad de las regulaciones y permisos para garantizar que tu proyecto cumpla con toda la normativa vigente, evitando multas y retrasos.'
-            },
-            {
-                icon: Lightbulb,
-                title: 'Valorización de tu Propiedad',
-                description: 'Un diseño arquitectónico profesional no solo mejora tu calidad de vida, sino que también incrementa significativamente el valor de tu inmueble.'
             }
         ]
     }
