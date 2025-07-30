@@ -21,22 +21,42 @@ interface Props {
 
 const { content } = Astro.props;
 const opacity = content.overlayOpacity ?? 1; // Default opacity if not specified
+
+// Check if backgroundImage is a video file
+const isVideo = content.backgroundImage && (
+    typeof content.backgroundImage === 'string' ? 
+    content.backgroundImage.endsWith('.mp4') || content.backgroundImage.endsWith('.webm') || content.backgroundImage.endsWith('.ogg') :
+    content.backgroundImage.src?.endsWith('.mp4') || content.backgroundImage.src?.endsWith('.webm') || content.backgroundImage.src?.endsWith('.ogg')
+);
 ---
 
 <section class="header-offset relative min-h-screen flex flex-col">
     {content.backgroundImage && (
         <div class="absolute inset-0 left-0 top-0 w-full h-full overflow-hidden">
-            <Image
-                src={content.backgroundImage}
-                alt=""
-                width={1920}
-                height={1080}
-                class="w-full h-full object-cover"
-                quality={70}
-                format="webp"
-                loading="eager"
-                decoding="async"
-            />
+            {isVideo ? (
+                <video
+                    src={content.backgroundImage}
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    class="w-full h-full object-cover"
+                >
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            ) : (
+                <Image
+                    src={content.backgroundImage}
+                    alt=""
+                    width={1920}
+                    height={1080}
+                    class="w-full h-full object-cover"
+                    quality={70}
+                    format="webp"
+                    loading="eager"
+                    decoding="async"
+                />
+            )}
             <div
                 class="hero-background absolute inset-0 left-0 top-0 w-full h-full overflow-hidden"
                 style={`opacity: ${opacity};`}
