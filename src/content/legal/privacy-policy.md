@@ -1,84 +1,73 @@
 ---
-title: "Privacy Policy"
-lastUpdated: "2024-03-04"
+title: "Política de Privacidad"
+lastUpdated: "2025-07-29"
 seo:
-  title: "Privacy Policy - Your Rights and Our Responsibilities"
-  description: "Learn how we collect, use, and protect your personal information in compliance with data protection regulations."
+  title: "Política de Privacidad - +ARQ"
 ---
 
-## Introduction
+## Introducción
 
-Welcome to our Privacy Policy. This document explains how we collect, use, and protect your personal information when you use our website and services.
+En **+ARQ** valoramos y respetamos la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, utilizamos, almacenamos y protegemos su información personal cuando visita nuestro sitio web o utiliza nuestros servicios arquitectónicos.
 
-## Information We Collect
+Al acceder a nuestro sitio web o contratar nuestros servicios, usted acepta las prácticas descritas en esta política.
 
-### Personal Information
+## Información que Recopilamos
 
-We may collect the following types of personal information:
+### Información Personal que Usted Proporciona
+- **Datos de contacto**: Nombre, apellidos, correo electrónico, número de teléfono.
+- **Información del proyecto**: Detalles sobre sus necesidades arquitectónicas, presupuesto, ubicación del proyecto.
+- **Datos de facturación**: RUT, dirección, información bancaria (solo cuando sea necesario).
+- **Comunicaciones**: Mensajes enviados a través de formularios de contacto, correos electrónicos, o consultas.
 
-- **Contact Information**: Name, email address, phone number, and mailing address.
-- **Account Information**: Username, password, and account preferences.
-- **Technical Information**: IP address, browser type, device information, and cookies.
-- **Usage Information**: Pages visited, time spent on site, and interaction with content.
+## Cómo Utilizamos su Información
 
-### How We Collect Information
+Utilizamos su información personal únicamente para:
 
-Information is collected through:
+- **Contacto directo**: Responder a sus consultas y comunicarnos con usted.
+- **Seguimiento de proyectos**: Mantener comunicación durante el desarrollo de proyectos arquitectónicos.
+- **Programación de reuniones**: Coordinar citas y visitas técnicas.
+- **Envío de propuestas**: Presentar cotizaciones y propuestas de servicios.
 
-- Direct submission via forms
-- Cookies and tracking technologies
-- Third-party services and analytics
+**No utilizamos sus datos para marketing masivo, publicidad dirigida o cualquier otro propósito comercial más allá del contacto directo relacionado con nuestros servicios arquitectónicos.**
 
-## How We Use Your Information
+## Base Legal para el Tratamiento
 
-We use your information to:
+Procesamos sus datos personales bajo las siguientes bases legales:
 
-- Provide and improve our services
-- Communicate with you about our products and services
-- Process transactions and fulfill orders
-- Personalize your experience
-- Comply with legal obligations
+- **Consentimiento**: Al completar formularios de contacto, usted nos autoriza a usar sus datos para responder.
+- **Interés legítimo**: Para responder a consultas de servicios arquitectónicos y mantener comunicación comercial directa.
+- **Ejecución contractual**: Para cumplir con contratos de servicios cuando corresponda.
 
-## Data Sharing and Disclosure
+## Compartir Información
 
-We may share your information with:
+### No Vendemos sus Datos
+Nunca vendemos, alquilamos o comercializamos su información personal a terceros.
 
-- Service providers who help us operate our business
-- Legal authorities when required by law
-- Business partners with your consent
+### Compartimos Información Únicamente Cuando:
+- **Proveedores de servicios**: Contratistas, ingenieros, consultores necesarios para su proyecto.
+- **Autoridades competentes**: Cuando sea requerido por ley o orden judicial.
+- **Situaciones de emergencia**: Para proteger la seguridad de personas o propiedad.
 
-We do not sell your personal information to third parties.
+Todos nuestros colaboradores firman acuerdos de confidencialidad para proteger sus datos.
 
-## Your Rights
+## Sus Derechos
 
-Depending on your location, you may have the right to:
+De acuerdo con la Ley N° 19.628 sobre Protección de la Vida Privada y normativas chilenas, usted tiene derecho a:
 
-- Access your personal information
-- Correct inaccurate information
-- Delete your information
-- Object to certain processing activities
-- Data portability
-- Withdraw consent
+- **Acceso**: Conocer qué datos personales tenemos sobre usted.
+- **Rectificación**: Corregir datos inexactos o incompletos.
+- **Cancelación**: Solicitar la eliminación de sus datos (sujeto a obligaciones legales).
+- **Oposición**: Oponerse al tratamiento de sus datos para fines específicos.
+- **Portabilidad**: Solicitar una copia de sus datos en formato estructurado.
 
-## Data Security
+Para ejercer estos derechos, contáctenos en: **contacto@masarq.cl**
 
-We implement appropriate technical and organizational measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction.
+---
 
-## Cookies and Tracking Technologies
+## Contacto
 
-Our website uses cookies and similar technologies to enhance your browsing experience. You can manage your cookie preferences through your browser settings.
+📧 **Email**: contacto@masarq.cl  
+📞 **Teléfono**: +56 9 7988 5559  
+📍 **Ubicación**: Región Metropolitana, Chile
 
-## Children's Privacy
 
-Our services are not intended for children under 13. We do not knowingly collect information from children under 13.
-
-## Changes to This Privacy Policy
-
-We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
-
-## Contact Us
-
-If you have any questions about this Privacy Policy, please contact us at:
-
-- Email: privacy@example.com
-- Address: 123 Privacy Street, Data City, 12345 
