@@ -38,12 +38,7 @@ Procesamos sus datos personales bajo las siguientes bases legales:
 - **Interés legítimo**: Para responder a consultas de servicios arquitectónicos y mantener comunicación comercial directa.
 - **Ejecución contractual**: Para cumplir con contratos de servicios cuando corresponda.
 
-## Compartir Información
-
-### No Vendemos sus Datos
-Nunca vendemos, alquilamos o comercializamos su información personal a terceros.
-
-### Compartimos Información Únicamente Cuando:
+## Compartimos Información Únicamente:
 - **Proveedores de servicios**: Contratistas, ingenieros, consultores necesarios para su proyecto.
 - **Autoridades competentes**: Cuando sea requerido por ley o orden judicial.
 - **Situaciones de emergencia**: Para proteger la seguridad de personas o propiedad.
