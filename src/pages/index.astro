@@ -15,6 +15,8 @@ import { benefitsLists } from '@data/benefits';
 import RecentPosts from '@components/sections/RecentPosts.astro';
 import heroImage from '../assets/images/home/hero-image.png';
 import styleGuideImage from '../assets/images/home/developer.jpg';
+import C4Image from '../assets/images/home/c4.png';
+
 
 const seoTitle = "Bienvenido";
 const seoDescription = "+Arq es una empresa de arquitectura y diseño de interiores";
@@ -44,8 +46,8 @@ const featuresSection = {
     description: "Ofrecemos Soluciones Arquitectónicas Integrales para personas, empresas y comunidades. Profesionales comprometidos con cada etapa de tu proyecto, desde la idea hasta la ejecución.",
     features: featureLists.main.features,
     button: {
-        text: "Ver más sobre nuestros servicios",
-        link: "/theme-info",
+        text: "Ponte en Contacto con Nosotros",
+        link: "/contact",
         variant: "primary" as const
     }
 }
@@ -67,8 +69,7 @@ const styleGuideSection = {
     headline: "Tu Socio en Arquitectura y Diseño",
     description: "En +ARQ, nos dedicamos a convertir tus ideas en realidad. Nuestro equipo de expertos está listo para guiarte en cada paso del proceso.",
     image: {
-        src: styleGuideImage,
-        alt: "Featured image"
+        src: C4Image
     }
 }
 
