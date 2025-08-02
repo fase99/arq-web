@@ -1,9 +1,9 @@
 export const siteConfig = {
-  companyName: '+ARQ',
+  companyName: '+Arq',
   siteUrl: 'https://arq.cl',
   Socials: {
       Email: 'contacto@masarq.cl',
-      Phone: '+56 9 7988 5559',
+      Phone: '+56 9 987 36 652',
       Location: 'Región Metropolitana, Chile'
   }
 };

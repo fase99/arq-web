@@ -18,7 +18,8 @@ const hearAboutOptions = [
 const serviceOptions = [
     { label: "Proyectos de Arquitectura", value: "proyectos_arquitectura" },
     { label: "Regularizaciones", value: "regularizaciones" },
-    { label: "Diseño Arquitectónico", value: "diseno_arquitectonico" }
+    { label: "Diseño Arquitectónico", value: "diseno_arquitectonico" },
+    { label: "Otros", value: "otros" }
 ];
 
 const formBackground = 'light';
@@ -82,12 +83,6 @@ const emailjsConfig = {
                 type="tel"
                 id="phone"
                 name="phone"
-                background={formBackground}
-            />
-            <Input
-                label="Nombre de la Empresa"
-                id="company"
-                name="company"
                 background={formBackground}
             />
         </div>
@@ -274,7 +269,6 @@ const emailjsConfig = {
                 from_name: name,
                 from_email: email,
                 phone: formData.get('phone') || 'No proporcionado',
-                company: formData.get('company') || 'No proporcionado',
                 hear_about: formData.get('hear-about') || 'No especificado',
                 service: service,
                 message: message,
