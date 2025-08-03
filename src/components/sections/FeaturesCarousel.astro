@@ -91,12 +91,13 @@ const paddingClass = getPaddingClass({
                                         "h-full rounded-xl border border-gray-200 shadow-lg overflow-hidden",
                                         background === 'dark' ? 'bg-white/95' : 'bg-white',
                                         "flex flex-col",
-                                        "transition-all duration-300 hover:shadow-xl hover:scale-105"
+                                        "transition-all duration-300 hover:shadow-xl hover:scale-[1.02]",
+                                        "mobile-feature-card"
                                     ]}
                                 >
                                     {/* Image Section */}
                                     {feature.image && (
-                                        <div class="h-48 overflow-hidden">
+                                        <div class="feature-image-container h-48 overflow-hidden">
                                             <img
                                                 src={typeof feature.image === 'string' ? feature.image : feature.image?.src}
                                                 alt={feature.title}
@@ -109,17 +110,17 @@ const paddingClass = getPaddingClass({
                                     )}
                                     
                                     {/* Content Section */}
-                                    <div class="p-6 flex flex-col text-center">
+                                    <div class="p-5 sm:p-6 flex flex-col text-center">
                                         <div class:list={[
-                                            "w-14 h-14 flex items-center justify-center rounded-lg mb-4 mx-auto",
+                                            "w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-lg mb-3 sm:mb-4 mx-auto",
                                             "bg-primary"
                                         ]}>
                                             <feature.icon
-                                                size={28}
+                                                size={24}
                                                 class="text-white"
                                             />
                                         </div>
-                                        <h3 class:list={["text-xl mb-3", "text-gray-900", "font-semibold"]}>
+                                        <h3 class:list={["text-lg sm:text-xl mb-2 sm:mb-3", "text-gray-900", "font-semibold"]}>
                                             {feature.title}
                                         </h3>
                                         <p class:list={["text-sm leading-relaxed", "text-gray-700"]}>
@@ -180,18 +181,27 @@ const paddingClass = getPaddingClass({
     
     // Initialize Swiper when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
+        // Verificar si estamos en móvil
+        const isMobile = window.innerWidth < 768;
+        
         const featuresSwiper = new Swiper('.features-swiper', {
             modules: [Navigation, Pagination, Autoplay],
             grabCursor: true,
-            centeredSlides: true,
+            centeredSlides: isMobile,
             slidesPerView: 'auto',
-            spaceBetween: 30,
+            spaceBetween: isMobile ? 16 : 30,
             loop: true,
             loopAdditionalSlides: 2,
+            touchEventsTarget: 'container',
+            touchRatio: 1,
+            touchAngle: 45,
+            threshold: 5,
             autoplay: {
                 delay: 4000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
+                stopOnLastSlide: false,
+                waitForTransition: true,
             },
             pagination: {
                 el: '.features-pagination',
@@ -201,10 +211,21 @@ const paddingClass = getPaddingClass({
             navigation: {
                 nextEl: '.features-next',
                 prevEl: '.features-prev',
+                hideOnClick: false,
             },
             breakpoints: {
-                320: {
+                0: {
                     slidesPerView: 1,
+                    spaceBetween: 16,
+                    centeredSlides: true,
+                },
+                480: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 20,
+                    centeredSlides: true,
+                },
+                640: {
+                    slidesPerView: 1.8,
                     spaceBetween: 20,
                     centeredSlides: true,
                 },
@@ -235,6 +256,29 @@ const paddingClass = getPaddingClass({
             
             swiperContainer.addEventListener('mouseleave', () => {
                 featuresSwiper.autoplay.start();
+            });
+        }
+        
+        // Manejar eventos de cambio de tamaño y orientación
+        let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+        window.addEventListener('resize', () => {
+            if (resizeTimer) clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                featuresSwiper.updateSize();
+                featuresSwiper.updateSlides();
+                featuresSwiper.updateProgress();
+                featuresSwiper.updateSlidesClasses();
+                featuresSwiper.slideTo(featuresSwiper.activeIndex);
+            }, 250);
+        });
+        
+        // Mejorar comportamiento en dispositivos táctiles
+        if ('ontouchstart' in window) {
+            // Prevenir que las interacciones con las flechas de navegación inicien un desplazamiento
+            document.querySelectorAll('.features-next, .features-prev').forEach(el => {
+                el.addEventListener('touchstart', (e) => {
+                    e.stopPropagation();
+                });
             });
         }
     });
@@ -328,37 +372,136 @@ const paddingClass = getPaddingClass({
     @media (max-width: 768px) {
         .features-swiper {
             padding: 20px 0;
+            overflow: visible;
         }
         
         .features-swiper .swiper-slide {
-            width: 300px;
+            width: 90%;
             min-height: 360px;
-            max-height: 420px;
+            height: auto;
+            max-height: none;
         }
         
         .features-next,
         .features-prev {
-            width: 45px !important;
-            height: 45px !important;
-            margin-top: -22.5px !important;
+            width: 40px !important;
+            height: 40px !important;
+            margin-top: -20px !important;
+            opacity: 0.8;
         }
         
         .features-next::after,
         .features-prev::after {
             font-size: 16px !important;
         }
+        
+        .features-pagination {
+            margin-top: 30px !important;
+        }
+        
+        .features-pagination .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            margin: 0 4px !important;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .features-swiper {
+            padding: 15px 0;
+        }
+        
+        .features-swiper .swiper-slide {
+            width: 85%;
+            min-height: 320px;
+        }
+        
+        .features-next,
+        .features-prev {
+            width: 36px !important;
+            height: 36px !important;
+            margin-top: -18px !important;
+            transform: translateX(0);
+        }
+        
+        .features-next {
+            right: 5px;
+        }
+        
+        .features-prev {
+            left: 5px;
+        }
     }
 
     @media (max-width: 480px) {
+        .features-carousel {
+            margin: 0 -8px;
+            width: calc(100% + 16px);
+        }
+        
+        .features-swiper {
+            padding: 10px 0;
+        }
+        
         .features-swiper .swiper-slide {
             width: 280px;
             min-height: 340px;
-            max-height: 400px;
+        }
+        
+        .features-next,
+        .features-prev {
+            width: 32px !important;
+            height: 32px !important;
+            margin-top: -16px !important;
+            background: rgba(255, 255, 255, 0.85);
+        }
+        
+        .features-next::after,
+        .features-prev::after {
+            font-size: 14px !important;
+        }
+        
+        /* Mejorar el toque en móvil */
+        .swiper-wrapper {
+            touch-action: pan-y;
         }
     }
 
     /* Grid layout fallback styles */
     .grid-cols-auto-fit {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    /* Mejoras para experiencia móvil */
+    .mobile-feature-card {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        will-change: transform;
+    }
+    
+    /* Optimización del clic/toque en móvil */
+    @media (max-width: 768px) {
+        .swiper-button-next.swiper-button-disabled,
+        .swiper-button-prev.swiper-button-disabled {
+            opacity: 0.2;
+        }
+        
+        /* Mejorar accesibilidad de controles en táctil */
+        .features-next, 
+        .features-prev {
+            opacity: 0.75;
+            pointer-events: auto;
+        }
+        
+        .features-next:active, 
+        .features-prev:active {
+            transform: scale(1.1);
+        }
+        
+        /* Ajustes para mejorar la fluidez del desplazamiento */
+        .features-swiper .swiper-slide {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
     }
 </style>
