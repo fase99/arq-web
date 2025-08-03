@@ -35,7 +35,7 @@ export const featureLists: Record<string, FeatureList> = {
                 image: proyectoImg
             },
             {
-                icon: Icons.Shield,
+                icon: Icons.FileCheck,
                 title: 'Regularizaciones',
                 description: 'Normalizamos tu propiedad ante la DOM, el SII y las entidades correspondientes. Proceso rápido y sin complicaciones legales.',
                 image: regulaImg
