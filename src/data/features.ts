@@ -30,7 +30,7 @@ export const featureLists: Record<string, FeatureList> = {
         features: [
             {
                 icon: Icons.Building2,
-                title: 'Proyectos de Arquitectura',
+                title: 'Proyectos de arquitectura',
                 description: 'Desarrollamos anteproyectos, permisos, especialidades, supervisión y ejecución de obras. Desde la concepción hasta la entrega final.',
                 image: proyectoImg
             },
@@ -42,7 +42,7 @@ export const featureLists: Record<string, FeatureList> = {
             },
             {
                 icon: Icons.PencilRuler,
-                title: 'Diseño Arquitectónico',
+                title: 'Diseño arquitectónico',
                 description: 'Creamos espacios funcionales, estéticos y únicos. Del concepto inicial a la realidad, cuidando cada detalle del diseño.',
                 image: diseñoImg
             }

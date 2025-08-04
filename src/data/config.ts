@@ -11,7 +11,7 @@ export const siteConfig = {
 export const SEO = {
   Separator: '|',
   SiteName: '+Arq',
-  defaultDescription: 'Soluciones Arquitectónicas Integrales',
+  defaultDescription: 'Soluciones arquitectónicas integrales',
 };
   
 export const blogSetting = {
