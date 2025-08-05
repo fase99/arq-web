@@ -66,7 +66,7 @@ const isCurrentPage = (link: string) => {
 
                 {/* Mobile Menu Panel */}
                 <div
-                    class="mobile-menu fixed  z-20 px-8 pt-20 bg-primary/40 lg:hidden hidden opacity-0 scale-95 transform transition-all duration-200 ease-out overflow-y-auto"
+                    class="mobile-menu absolute top-full right-0 mt-2 w-64 rounded-lg bg-primary/95 backdrop-blur-md shadow-lg p-6 lg:hidden hidden opacity-0 translate-x-4 transform transition-all duration-300 ease-out"
                 >
                     <ul class="flex flex-col gap-4">
                         {
@@ -75,9 +75,9 @@ const isCurrentPage = (link: string) => {
                                     <a
                                         href={item.link}
                                         class:list={[
-                                            'py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-white',
+                                            'block py-2 text-lg rounded-md focus:outline-none focus:ring-2 focus:ring-white',
                                             isCurrentPage(item.link)
-                                                ? 'text-white font-semibold'
+                                                ? 'text-white font-bold'
                                                 : 'text-gray-200 hover:text-white',
                                         ]}
                                         aria-current={isCurrentPage(item.link) ? 'page' : undefined}
@@ -90,8 +90,8 @@ const isCurrentPage = (link: string) => {
                     </ul>
 
                     {/* Mobile CTA button */}
-                    <div class="mt-8 pb-8">
-                        <Button href={ctaButton.link} variant="ghostLight">{ctaButton.name}</Button>
+                    <div class="mt-6 border-t border-white/10 pt-6">
+                        <Button href={ctaButton.link} variant="ghostLight" >{ctaButton.name}</Button>
                     </div>
                 </div>
             </nav>
@@ -108,25 +108,24 @@ const isCurrentPage = (link: string) => {
 
     mobileMenuButton?.addEventListener('click', () => {
         const isHidden = mobileMenu?.classList.contains('hidden');
-        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
 
         if (isHidden) {
             document.body.style.overflow = 'hidden';
             mobileMenu?.classList.remove('hidden');
             requestAnimationFrame(() => {
-                mobileMenu?.classList.remove('opacity-0', 'scale-95');
-                mobileMenu?.classList.add('opacity-100', 'scale-100');
+                mobileMenu?.classList.remove('opacity-0', 'translate-x-4');
+                mobileMenu?.classList.add('opacity-100', 'translate-x-0');
             });
             menuIcon?.classList.add('hidden');
             closeIcon?.classList.remove('hidden');
             mobileMenuButton.setAttribute('aria-expanded', 'true');
         } else {
             document.body.style.overflow = '';
-            mobileMenu?.classList.add('opacity-10', 'scale-95');
-            mobileMenu?.classList.remove('opacity-100', 'scale-100');
+            mobileMenu?.classList.add('opacity-0', 'translate-x-4');
+            mobileMenu?.classList.remove('opacity-100', 'translate-x-0');
             setTimeout(() => {
                 mobileMenu?.classList.add('hidden');
-            }, 200);
+            }, 300);
             menuIcon?.classList.remove('hidden');
             closeIcon?.classList.add('hidden');
             mobileMenuButton.setAttribute('aria-expanded', 'false');
