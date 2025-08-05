@@ -179,106 +179,88 @@ const paddingClass = getPaddingClass({
     import { Swiper } from 'swiper';
     import { Navigation, Pagination, Autoplay } from 'swiper/modules';
     
-    // Initialize Swiper when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
-        // Verificar si estamos en móvil
-        const isMobile = window.innerWidth < 768;
-        
         const featuresSwiper = new Swiper('.features-swiper', {
             modules: [Navigation, Pagination, Autoplay],
-            grabCursor: true,
-            centeredSlides: isMobile,
-            slidesPerView: 'auto',
-            spaceBetween: isMobile ? 16 : 30,
+            
+            // Configuración básica
+            direction: 'horizontal',
             loop: true,
-            loopAdditionalSlides: 2,
-            touchEventsTarget: 'container',
+            grabCursor: true,
+            
+            // Slides por vista y espaciado
+            slidesPerView: 1,
+            spaceBetween: 20,
+            
+            // Velocidad y efectos
+            speed: 500,
+            effect: 'slide',
+            
+            // Configuración táctil
             touchRatio: 1,
             touchAngle: 45,
-            threshold: 5,
+            allowTouchMove: true,
+            
+            // Autoplay
             autoplay: {
                 delay: 4000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
-                stopOnLastSlide: false,
-                waitForTransition: true,
             },
+            
+            // Navegación
+            navigation: {
+                nextEl: '.features-next',
+                prevEl: '.features-prev',
+            },
+            
+            // Paginación
             pagination: {
                 el: '.features-pagination',
                 clickable: true,
                 dynamicBullets: true,
             },
-            navigation: {
-                nextEl: '.features-next',
-                prevEl: '.features-prev',
-                hideOnClick: false,
-            },
+            
+            // Breakpoints responsivos
             breakpoints: {
-                0: {
+                320: {
                     slidesPerView: 1,
                     spaceBetween: 16,
-                    centeredSlides: true,
-                },
-                480: {
-                    slidesPerView: 1.2,
-                    spaceBetween: 20,
-                    centeredSlides: true,
                 },
                 640: {
-                    slidesPerView: 1.8,
-                    spaceBetween: 20,
-                    centeredSlides: true,
-                },
-                768: {
                     slidesPerView: 2,
-                    spaceBetween: 25,
-                    centeredSlides: false,
+                    spaceBetween: 20,
                 },
                 1024: {
                     slidesPerView: 3,
                     spaceBetween: 30,
-                    centeredSlides: false,
+                }
+            },
+            
+            // Eventos
+            on: {
+                init: function() {
+                    console.log('Swiper inicializado correctamente');
                 },
-                1280: {
-                    slidesPerView: 3,
-                    spaceBetween: 35,
-                    centeredSlides: false,
+                slideChange: function() {
+                    // El slide cambió correctamente
                 }
             }
         });
-        
-        // Add hover pause functionality
-        const swiperContainer = document.querySelector('.features-swiper');
-        if (swiperContainer) {
-            swiperContainer.addEventListener('mouseenter', () => {
-                featuresSwiper.autoplay.stop();
+
+        // Control de hover para pausar autoplay
+        const swiperEl = document.querySelector('.features-swiper');
+        if (swiperEl) {
+            swiperEl.addEventListener('mouseenter', () => {
+                if (featuresSwiper.autoplay) {
+                    featuresSwiper.autoplay.stop();
+                }
             });
             
-            swiperContainer.addEventListener('mouseleave', () => {
-                featuresSwiper.autoplay.start();
-            });
-        }
-        
-        // Manejar eventos de cambio de tamaño y orientación
-        let resizeTimer: ReturnType<typeof setTimeout> | undefined;
-        window.addEventListener('resize', () => {
-            if (resizeTimer) clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                featuresSwiper.updateSize();
-                featuresSwiper.updateSlides();
-                featuresSwiper.updateProgress();
-                featuresSwiper.updateSlidesClasses();
-                featuresSwiper.slideTo(featuresSwiper.activeIndex);
-            }, 250);
-        });
-        
-        // Mejorar comportamiento en dispositivos táctiles
-        if ('ontouchstart' in window) {
-            // Prevenir que las interacciones con las flechas de navegación inicien un desplazamiento
-            document.querySelectorAll('.features-next, .features-prev').forEach(el => {
-                el.addEventListener('touchstart', (e) => {
-                    e.stopPropagation();
-                });
+            swiperEl.addEventListener('mouseleave', () => {
+                if (featuresSwiper.autoplay) {
+                    featuresSwiper.autoplay.start();
+                }
             });
         }
     });
@@ -292,94 +274,76 @@ const paddingClass = getPaddingClass({
 
     .features-carousel {
         position: relative;
-        margin: 0 auto;
         max-width: 100%;
         overflow: hidden;
     }
 
     .features-swiper {
         width: 100%;
-        padding: 50px 0;
+        padding: 40px 0;
     }
 
     .features-swiper .swiper-slide {
-        width: 320px;
         height: auto;
-        min-height: 380px;
-        max-height: 450px;
+        display: flex;
     }
 
-    /* Custom navigation buttons */
+    .features-swiper .swiper-slide > div {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Navigation buttons */
     .features-next,
     .features-prev {
         color: var(--color-primary) !important;
         font-weight: bold;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.9);
         border-radius: 50%;
-        width: 55px !important;
-        height: 55px !important;
-        margin-top: -27.5px !important;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        width: 50px !important;
+        height: 50px !important;
+        margin-top: -25px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
-        z-index: 10;
     }
 
     .features-next:hover,
     .features-prev:hover {
         background: var(--color-primary);
         color: white !important;
-        transform: scale(1.15);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
     }
 
     .features-next::after,
     .features-prev::after {
-        font-size: 20px !important;
+        font-size: 18px !important;
         font-weight: bold;
     }
 
-    /* Custom pagination */
+    /* Pagination */
     .features-pagination {
         position: relative !important;
-        margin-top: 40px !important;
+        margin-top: 30px !important;
     }
 
     .features-pagination .swiper-pagination-bullet {
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
         background: var(--color-primary);
-        opacity: 0.4;
+        opacity: 0.3;
+        margin: 0 5px !important;
         transition: all 0.3s ease;
-        margin: 0 6px !important;
     }
 
     .features-pagination .swiper-pagination-bullet-active {
         opacity: 1;
-        transform: scale(1.3);
-        background: var(--color-primary);
+        transform: scale(1.2);
     }
 
-    /* Enhanced slide styles */
-    .swiper-slide {
-        transition: all 0.3s ease;
-    }
-
-    .swiper-slide:hover {
-        transform: translateY(-5px);
-    }
-
-    /* Responsive adjustments */
+    /* Responsive */
     @media (max-width: 768px) {
         .features-swiper {
             padding: 20px 0;
-            overflow: visible;
-        }
-        
-        .features-swiper .swiper-slide {
-            width: 90%;
-            min-height: 360px;
-            height: auto;
-            max-height: none;
         }
         
         .features-next,
@@ -387,121 +351,25 @@ const paddingClass = getPaddingClass({
             width: 40px !important;
             height: 40px !important;
             margin-top: -20px !important;
-            opacity: 0.8;
-        }
-        
-        .features-next::after,
-        .features-prev::after {
-            font-size: 16px !important;
-        }
-        
-        .features-pagination {
-            margin-top: 30px !important;
-        }
-        
-        .features-pagination .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            margin: 0 4px !important;
-        }
-    }
-
-    @media (max-width: 640px) {
-        .features-swiper {
-            padding: 15px 0;
-        }
-        
-        .features-swiper .swiper-slide {
-            width: 85%;
-            min-height: 320px;
-        }
-        
-        .features-next,
-        .features-prev {
-            width: 36px !important;
-            height: 36px !important;
-            margin-top: -18px !important;
-            transform: translateX(0);
-        }
-        
-        .features-next {
-            right: 5px;
-        }
-        
-        .features-prev {
-            left: 5px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .features-carousel {
-            margin: 0 -8px;
-            width: calc(100% + 16px);
-        }
-        
-        .features-swiper {
-            padding: 10px 0;
-        }
-        
-        .features-swiper .swiper-slide {
-            width: 280px;
-            min-height: 340px;
-        }
-        
-        .features-next,
-        .features-prev {
-            width: 32px !important;
-            height: 32px !important;
-            margin-top: -16px !important;
-            background: rgba(255, 255, 255, 0.85);
         }
         
         .features-next::after,
         .features-prev::after {
             font-size: 14px !important;
         }
-        
-        /* Mejorar el toque en móvil */
-        .swiper-wrapper {
-            touch-action: pan-y;
-        }
     }
 
-    /* Grid layout fallback styles */
-    .grid-cols-auto-fit {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    
-    /* Mejoras para experiencia móvil */
-    .mobile-feature-card {
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        will-change: transform;
-    }
-    
-    /* Optimización del clic/toque en móvil */
-    @media (max-width: 768px) {
-        .swiper-button-next.swiper-button-disabled,
-        .swiper-button-prev.swiper-button-disabled {
-            opacity: 0.2;
-        }
-        
-        /* Mejorar accesibilidad de controles en táctil */
-        .features-next, 
+    @media (max-width: 480px) {
+        .features-next,
         .features-prev {
-            opacity: 0.75;
-            pointer-events: auto;
+            width: 35px !important;
+            height: 35px !important;
+            margin-top: -17.5px !important;
         }
         
-        .features-next:active, 
-        .features-prev:active {
-            transform: scale(1.1);
-        }
-        
-        /* Ajustes para mejorar la fluidez del desplazamiento */
-        .features-swiper .swiper-slide {
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
+        .features-next::after,
+        .features-prev::after {
+            font-size: 12px !important;
         }
     }
 </style>
